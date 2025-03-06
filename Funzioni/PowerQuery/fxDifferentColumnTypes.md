@@ -4,6 +4,10 @@
 La funzione crea una nuova colonna in una tabella della quale analizza una o più colonne.
 Per ciascuna colonna verifica, cella per cella, il tipo di dato contenuto e lo restituisce nella nuova colonna.
 
+## Input
+- Tabella: è la tabella dalla quale partire
+- Colonne: è una lista di colonne delle quali prelevare il tipo dati
+
 ## Esempio
 
 Partendo dalla seguente tabella:
@@ -28,9 +32,7 @@ Applicando la funzione `= fxDifferentColumnTypes(Source,{"Dato","Secondo Dato"})
 | Esempio	    | 12	            | Text.Type	    | Number.Type       |
 | 22	        | 66	            | Number.Type	| Number.Type       |
 
-## Input
-- Tabella: è la tabella dalla quale partire
-- Colonne: è una lista di colonne delle quali prelevare il tipo dati
+
 
 ## Funzione
 ```sql
