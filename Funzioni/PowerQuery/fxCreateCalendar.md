@@ -8,6 +8,9 @@ La funzione crea un calendario tra due date inserite in input.
 - DateStart: la Data iniziale
 - DateEnd: la Data finale
 
+## Output
+- Una tabella con l'elenco delle date sotto forma di calendario e relative informazioni tra le due date proposte in input
+
 ## Esempio
 
 Dalla funzione inserire DateStart = 1/1/2025 e DateEnd = 8/1/2025

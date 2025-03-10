@@ -8,6 +8,9 @@ Per ciascuna colonna verifica, cella per cella, il tipo di dato contenuto e lo r
 - Tabella: è la tabella dalla quale partire
 - Colonne: è una lista di colonne delle quali prelevare il tipo dati
 
+## Output
+- Una serie di campi aggiuntivi con il tipo di dato di ciascuna colonna passata in input.
+
 ## Esempio
 
 Partendo dalla seguente tabella:

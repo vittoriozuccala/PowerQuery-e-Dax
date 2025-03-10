@@ -12,6 +12,9 @@ Questa piattaforma restituisce spesso date divise in campi differenti.
 - aaVal = un numero che indica l'anno
 - errore_o_ data = opzionale. "errore" o "data". Ciò che restituisce in caso di errore
 
+## Output
+- Data: Una data con, in caso di errore, o la scritta *errore* oppure *01/01/1900*.
+
 ## Esempio
 Supponiamo una tabella di ingresso:
 ```sql
