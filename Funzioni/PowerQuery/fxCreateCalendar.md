@@ -7,11 +7,15 @@ La funzione crea un calendario tra due date inserite in input.
 ## Input
 - DateStart: la Data iniziale
 - DateEnd: la Data finale
+- State: è un parametro opzionale: una sigla composta da due lettere che indica lo stato es. IT, DE, UK
 
 ## Output
 - Una tabella con l'elenco delle date sotto forma di calendario e relative informazioni tra le due date proposte in input
 
 ## Esempio
+
+La funzione, se specificato un parametro quale la sigla dello stato, resituisce la tabella sottostanza con l'aggiunta dei giorni festivi.
+Per fare questo necessita di una connessione web e sfrutta la seguente [API](https://date.nager.at/api/v3/publicholidays/2025/IT) inserendo tutti gli anni presenti nel range di date sotto espresse e la sigla dello stato interessata.
 
 Dalla funzione inserire DateStart = 1/1/2025 e DateEnd = 8/1/2025
 In output restituisce:
@@ -31,11 +35,12 @@ In output restituisce:
 ## Funzione
 
 ```sql
-(DateStart as text, DateEnd as text) =>
+ (DateStart as text, DateEnd as text, optional State as text) =>
 // Questa fx permette di creare un calendario completo.
 // INPUT: 
 //      - DataStart: è la data dalla quale si desidera far iniziare il calendario;
 //      - DataEnd: è la data nella quale si vuole far terminare il calendario. 
+//	    - State: è un parametro opzionale: è una sigla composta da due lettere che indica lo stato es. IT, DE, UK
 // OUTPUT: un calendario completo
 //
 // NB: inserendo uno spazio nella DataEnd, il sistema prenderà la data odierna.
@@ -66,9 +71,40 @@ let
     CompleteQuarterOfTheYear = Table.AddColumn(QuarterOfTheYear, "CompleteQuarterOfTheYear", each Text.From([Year])&"Q"&Text.From([QuarterOfTheYear]) , type text),
     
     // Day
-    NumberOfDay = Table.AddColumn(CompleteQuarterOfTheYear, "Day", each Date.Day([Data]), Int64.Type)
+    NumberOfDay = Table.AddColumn(CompleteQuarterOfTheYear, "Day", each Date.Day([Data]), Int64.Type),
     
+    // Giorni Feriali
+    NoWorkingDays= 
+    if 
+        State <> null 
+    then
+    let
+        ListOfYears = List.Distinct(NumberOfDay[Year]), 
+        ListTableNoWorkingDays = List.Accumulate(
+            ListOfYears,
+            {},
+            (listOUT,listElement) => listOUT & Json.Document(Web.Contents("https://date.nager.at/api/v3/publicholidays/"& Text.From(listElement)&"/"&State))
+        ),
+        TableNoWorkingDays = Table.TransformColumnTypes( 
+                    Table.RemoveColumns( 
+                        Table.FromRecords( 
+                            ListTableNoWorkingDays
+                        ),
+                        {"fixed", "global", "counties", "launchYear", "types"}
+                    ),
+                    {{"date", type date}, {"localName", type text}, {"name", type text}, {"countryCode", type text}}
+                ),
+        TableJoin = Table.Join(
+            NumberOfDay,
+            "Data",
+            TableNoWorkingDays,
+            "date",
+            JoinKind.LeftOuter
+        )
+    in TableJoin
+    else 
+        NumberOfDay
+
     
-    
-in  NumberOfDay
+in  NoWorkingDays
 ```
