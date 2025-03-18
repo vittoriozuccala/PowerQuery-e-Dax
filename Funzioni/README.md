@@ -9,3 +9,4 @@ In questa sezione verranno salvate le funzioni che, di volta in volta, andrò a 
   - **Utility**
     - [fxDifferentColumnType(Tabella, "campo")](./PowerQuery/fxDifferentColumnTypes.md) Quando una tabella ha una o più colonne con valori diversi, la funzione crea una nuova colonna con il tipo dati esplicitato per ogni cella.
     - [fxRemoveRowsColumnsBlank](./PowerQuery/fxRemoveRowsColumnsBlank.md) Nel caso in cui, in una tabella, ci siano righe o colonne vuote, si passa in input tale tabella e si ottiene una tabella senza colonne o righe vuote in output
+    - [fxCleaningTextFields](./PowerQuery/fxCleaningTextFields.md) A fronte di una tabella ed una lista di campi testuali, elimina spazi intermedi e finali e caratteri non utilizzabili
