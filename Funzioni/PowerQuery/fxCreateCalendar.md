@@ -17,6 +17,10 @@ La funzione crea un calendario tra due date inserite in input.
 La funzione, se specificato un parametro quale la sigla dello stato, resituisce la tabella sottostanza con l'aggiunta dei giorni festivi.
 Per fare questo necessita di una connessione web e sfrutta la seguente [API](https://date.nager.at/api/v3/publicholidays/2025/IT) inserendo tutti gli anni presenti nel range di date sotto espresse e la sigla dello stato interessata.
 
+Questa [API https://date.nager.at/api/v3/publicholidays/2025/IT](https://date.nager.at/api/v3/publicholidays/2025/IT) richiede due parametri principali:
+- *L'anno*: inserito estrapolandolo in automatico dalle date inserite nel primo e secondo parametro
+- *La nazione*: composta dall'ultima sigla in fondo alla stringa
+
 Dalla funzione inserire DateStart = 1/1/2025 e DateEnd = 8/1/2025
 In output restituisce:
 
