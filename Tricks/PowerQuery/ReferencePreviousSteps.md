@@ -28,9 +28,12 @@ let
          }),
     MultipyAgex10 = Table.TransformColumns(Source, {{"Age", each _ * 10, type number}}),
     MultipyWagex1000 = Table.TransformColumns(MultipyAgex10, {{"Wage", each _ * 1000, type number}}),
-    #"Removed Columns" = Table.RemoveColumns(MultipyWagex1000,{"Age", "Wage"}) meta [ReferenceAge = MultipyAgex10, ReferenceWage = MultipyWagex1000]
+    RemovedColumns = Table.RemoveColumns(
+                        MultipyWagex1000,
+                        {"Age", "Wage"}
+                        ) meta [ReferenceAge = MultipyAgex10, ReferenceWage = MultipyWagex1000]
 in
-    #"Removed Columns"
+    RemovedColumns
 ```
 
 
