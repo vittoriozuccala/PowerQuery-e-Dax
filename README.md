@@ -1,30 +1,32 @@
 # PowerQuery-e-Dax
-Funzioni, Challenges e Esercizi di PQ e PBI
 
+Funzioni, Challenges e Esercizi di PQ e PBI.
+Questo repository si occupa di raccogliere gli esercizi preparati per gli studenti.
 
 - **Risorse DAX**
-  - *Basi dati OData*
-    - *Nothwind*: https://services.odata.org/northwind/northwind.svc/
-    - *AdventureWorks*: https://services.odata.org/AdventureWorksV3/AdventureWorks.svc/
+  - _Basi dati OData_
+    - _Nothwind_: https://services.odata.org/northwind/northwind.svc/
+    - _AdventureWorks_: https://services.odata.org/AdventureWorksV3/AdventureWorks.svc/
 - **Risorse PowerQuery**
-  - *API per giorni festivi*: [API](https://date.nager.at/api/v3/publicholidays/2025/IT) dove cambiare l'anno e lo stato alla fine
+  - _API per giorni festivi_: [API](https://date.nager.at/api/v3/publicholidays/2025/IT) dove cambiare l'anno e lo stato alla fine
   - [Funzioni](./Funzioni/README.md)
 
-
-
-
 # Libro PowerQuery Beyond the limits
-# PowerQuery 
 
-Questo repository contiene diversi esempi e spunti per l'ambiente *PowerQuery*
+# PowerQuery
+
+Questo repository contiene diversi esempi e spunti per l'ambiente _PowerQuery_
 
 Inizio delle informazioni
 
 Arrivato a pagina 110: "Example 3: Replacing Multiple Values by Using List.Accumulate"
 
 ## Chapter 01: Listes
+
 ### Estrarre da una lista di colonne solo le non date
+
 Se ho una lista di colonne tipo:
+
 - Product
 - Color
 - 31-Jan-22
@@ -51,8 +53,11 @@ Se ho una lista di colonne tipo:
 ```
 
 ## Chapter 02: Records
+
 ### Skippare una lista in base al tipo di dato
+
 Per non avere un numero hard coded all'interno del codice, invece di usare
+
 ```sql
 = List.Skip (Record.ToList (_), 2)
 ```
@@ -64,7 +69,9 @@ Per non avere un numero hard coded all'interno del codice, invece di usare
 ```
 
 ## Modi differenti per OR ed AND
+
 C'è un modo diverso per fare questo OR:
+
 ```sql
 if [Region] = "South" or [Region] = "West"
        then "South-West" else
@@ -73,6 +80,7 @@ if [Region] = "South" or [Region] = "West"
 ```
 
 utilizzanto List.Contains:
+
 ```sql
 if List.Contains({"South", "West"}, [Region])
           then "South-West" else
@@ -83,7 +91,7 @@ if List.Contains({"South", "West"}, [Region])
 Per condizioni algebriche:
 
 ```sql
-=if 
+=if
 List.Contains(
     {[Sales] > 14500, [Profit] > 5000}, true
 ) then [Sales] * 0.1 else 0
@@ -91,9 +99,11 @@ List.Contains(
 
 Analogamente c'è un modo diverso per fare questo AND:
 Condition:
+
 - If the Date column value is between January and March and the Region Group column is South-West, return Seasonal.
 - Otherwise, return Non Seasonal
-La sintassi è la seguente
+  La sintassi è la seguente
+
 ```sql
 =List.ContainsAll (
     {A List to search in},
@@ -108,6 +118,7 @@ La sintassi è la seguente
 ```
 
 utilizzanto List.ContainsAll:
+
 ```M
 if
     List.ContainsAll(
@@ -116,4 +127,4 @@ if
     )
 then "Seasonal"
 else "Non Seasonal"
-``` 
+```
